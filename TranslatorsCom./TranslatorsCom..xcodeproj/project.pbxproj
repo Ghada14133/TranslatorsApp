@@ -19,6 +19,14 @@
 		35E8FCF2277DEC590092D6CB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 35E8FCF1277DEC590092D6CB /* FirebaseFirestore */; };
 		35E8FCF4277DEC590092D6CB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 35E8FCF3277DEC590092D6CB /* FirebaseStorage */; };
 		35E8FCF6278193720092D6CB /* signUpPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FCF5278193720092D6CB /* signUpPage.swift */; };
+		35E8FCFF278582A80092D6CB /* translatorProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FCFE278582A80092D6CB /* translatorProfile.swift */; };
+		35E8FD0127859F220092D6CB /* transBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FD0027859F220092D6CB /* transBio.swift */; };
+		35E8FD03278720100092D6CB /* coustemTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FD02278720100092D6CB /* coustemTableCell.swift */; };
+		35E8FD05279304990092D6CB /* homeTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FD04279304990092D6CB /* homeTranslator.swift */; };
+		35E8FD0727930BC80092D6CB /* ordersPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FD0627930BC80092D6CB /* ordersPage.swift */; };
+		35E8FD0927934E6E0092D6CB /* signAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FD0827934E6E0092D6CB /* signAs.swift */; };
+		35E8FD0D2796A8140092D6CB /* allTranslatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FD0C2796A8140092D6CB /* allTranslatorCell.swift */; };
+		35E8FD0F2796F7540092D6CB /* signUpTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FD0E2796F7540092D6CB /* signUpTranslator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +41,14 @@
 		35E8FCEA277DC6800092D6CB /* logIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logIn.swift; sourceTree = "<group>"; };
 		35E8FCEC277DEB500092D6CB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		35E8FCF5278193720092D6CB /* signUpPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpPage.swift; sourceTree = "<group>"; };
+		35E8FCFE278582A80092D6CB /* translatorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = translatorProfile.swift; sourceTree = "<group>"; };
+		35E8FD0027859F220092D6CB /* transBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transBio.swift; sourceTree = "<group>"; };
+		35E8FD02278720100092D6CB /* coustemTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coustemTableCell.swift; sourceTree = "<group>"; };
+		35E8FD04279304990092D6CB /* homeTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeTranslator.swift; sourceTree = "<group>"; };
+		35E8FD0627930BC80092D6CB /* ordersPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ordersPage.swift; sourceTree = "<group>"; };
+		35E8FD0827934E6E0092D6CB /* signAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signAs.swift; sourceTree = "<group>"; };
+		35E8FD0C2796A8140092D6CB /* allTranslatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allTranslatorCell.swift; sourceTree = "<group>"; };
+		35E8FD0E2796F7540092D6CB /* signUpTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpTranslator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,12 +86,10 @@
 			children = (
 				35E8FCFC27847A060092D6CB /* model */,
 				35E8FCFB278479E80092D6CB /* views */,
+				35E8FCFD27847A380092D6CB /* controller */,
 				355D3FF5277B19EB00A97D7B /* AppDelegate.swift */,
 				355D3FF7277B19EB00A97D7B /* SceneDelegate.swift */,
-				355D3FF9277B19EB00A97D7B /* ViewController.swift */,
-				35E8FCEA277DC6800092D6CB /* logIn.swift */,
-				35E8FCF5278193720092D6CB /* signUpPage.swift */,
-				355D3FFB277B19EB00A97D7B /* Main.storyboard */,
+				35E8FCFE278582A80092D6CB /* translatorProfile.swift */,
 				355D3FFE277B19F100A97D7B /* Assets.xcassets */,
 				355D4000277B19F100A97D7B /* LaunchScreen.storyboard */,
 				355D4003277B19F100A97D7B /* Info.plist */,
@@ -87,7 +101,7 @@
 		35E8FCFB278479E80092D6CB /* views */ = {
 			isa = PBXGroup;
 			children = (
-				35E8FCFD27847A380092D6CB /* controller */,
+				355D3FFB277B19EB00A97D7B /* Main.storyboard */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -95,6 +109,8 @@
 		35E8FCFC27847A060092D6CB /* model */ = {
 			isa = PBXGroup;
 			children = (
+				35E8FCEA277DC6800092D6CB /* logIn.swift */,
+				35E8FCF5278193720092D6CB /* signUpPage.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -102,6 +118,14 @@
 		35E8FCFD27847A380092D6CB /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				355D3FF9277B19EB00A97D7B /* ViewController.swift */,
+				35E8FD02278720100092D6CB /* coustemTableCell.swift */,
+				35E8FD0027859F220092D6CB /* transBio.swift */,
+				35E8FD0E2796F7540092D6CB /* signUpTranslator.swift */,
+				35E8FD04279304990092D6CB /* homeTranslator.swift */,
+				35E8FD0C2796A8140092D6CB /* allTranslatorCell.swift */,
+				35E8FD0827934E6E0092D6CB /* signAs.swift */,
+				35E8FD0627930BC80092D6CB /* ordersPage.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -187,7 +211,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				355D3FFA277B19EB00A97D7B /* ViewController.swift in Sources */,
+				35E8FD0D2796A8140092D6CB /* allTranslatorCell.swift in Sources */,
+				35E8FD03278720100092D6CB /* coustemTableCell.swift in Sources */,
+				35E8FCFF278582A80092D6CB /* translatorProfile.swift in Sources */,
+				35E8FD05279304990092D6CB /* homeTranslator.swift in Sources */,
 				35E8FCF6278193720092D6CB /* signUpPage.swift in Sources */,
+				35E8FD0927934E6E0092D6CB /* signAs.swift in Sources */,
+				35E8FD0727930BC80092D6CB /* ordersPage.swift in Sources */,
+				35E8FD0F2796F7540092D6CB /* signUpTranslator.swift in Sources */,
+				35E8FD0127859F220092D6CB /* transBio.swift in Sources */,
 				355D3FF6277B19EB00A97D7B /* AppDelegate.swift in Sources */,
 				355D3FF8277B19EB00A97D7B /* SceneDelegate.swift in Sources */,
 				35E8FCEB277DC6800092D6CB /* logIn.swift in Sources */,

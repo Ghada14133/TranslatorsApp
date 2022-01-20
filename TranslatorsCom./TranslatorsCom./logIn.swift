@@ -50,7 +50,7 @@ class logIn: UIViewController {
         view.addSubview(password)
         view.addSubview(loginButton)
         
-        
+        view.backgroundColor = .white
         
         
         loginButton.addTarget(self, action: #selector(signFunc), for: .touchDown)
