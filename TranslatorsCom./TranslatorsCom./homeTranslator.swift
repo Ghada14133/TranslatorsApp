@@ -36,9 +36,12 @@ class homeTranslator: UIViewController, UITableViewDelegate, UITableViewDataSour
       
         loadUser()
         self.tableView.register(allTranslatorCell.self, forCellReuseIdentifier: "cell")
-
-
+        
+     
+       
     }
+
+    
 //    override func viewWillLayoutSubviews() {
 //        settingsButt.frame = CGRect(x: 5, y: 40, width: 50, height: 100)
 //
@@ -107,13 +110,41 @@ class homeTranslator: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        cell.userImage.image = arrTanslator[indexPath.row].photo
         let users = arrTanslator[indexPath.row]
         cell.textLabel?.text = users.name
+        cell.imageView?.image = UIImage(systemName: "person")
+        
 //        cell.nameLabel?.image = users.photo
+        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+              let url = URL(string: urlString) else {
+                 return cell
+              }
+        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            
+            
+            guard let data = data, error == nil else {
+            return
+        }
+            let imageDownloded = UIImage(data: data)
+            
+            DispatchQueue.main.async {
+                cell.imageView?.image = imageDownloded
+
+            }
+
+        }).resume()
+
+          
+        
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrTanslator.count
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell = arrTanslator[indexPath.row]
+         let profileVc = translatorProfile()
+        self.present(profileVc, animated: true, completion: nil)
+        
+    }
     struct translatprInfo {
         let name : String
         let photo : String

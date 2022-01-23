@@ -11,6 +11,7 @@ class signAs: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     let arrOPtions = ["translator", "client"]
 
+    @IBOutlet weak var transOutlet: UIButton!
     let picker : UIPickerView = {
         let pic = UIPickerView()
         return pic
@@ -25,7 +26,21 @@ class signAs: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     let submitButton : UIButton = {
         let signup = UIButton()
         signup.backgroundColor = .systemMint
-        signup.setTitle("Submit", for: .normal)
+        signup.setTitle("Contonue", for: .normal)
+        return signup
+
+    }()
+    let transButton : UIButton = {
+        let signup = UIButton()
+        signup.backgroundColor = .systemMint
+        signup.setTitle("Trsanslator", for: .normal)
+        return signup
+
+    }()
+    let clientButton : UIButton = {
+        let signup = UIButton()
+        signup.backgroundColor = .systemMint
+        signup.setTitle("Client", for: .normal)
         return signup
 
     }()
@@ -35,17 +50,24 @@ class signAs: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
         view.addSubview(signAs)
 //        view.addSubview(picker)
-        view.addSubview(submitButton)
+//        view.addSubview(submitButton)
+        view.addSubview(transButton)
+        view.addSubview(clientButton)
         picker.dataSource = self
         picker.delegate = self
         
+        view.backgroundColor = .white
         
-        submitButton.addTarget(self, action: #selector(submitFunc), for: .touchDown)
+//        submitButton.addTarget(self, action: #selector(submitFunc), for: .touchDown)
+        transButton.addTarget(self, action: #selector(transMove), for: .touchDown)
+        clientButton.addTarget(self, action: #selector(clientMove), for: .touchDown)
 
     }
     override func viewWillLayoutSubviews() {
         signAs.frame = CGRect(x: 30, y: 350, width: 320, height: 40)
-        picker.frame = CGRect(x: 70, y: 380, width: 150, height: 80)
+        transButton.frame = CGRect(x: 70, y: 400, width: 150, height: 40)
+        clientButton.frame = CGRect(x: 70, y: 450, width: 150, height: 40)
+
         submitButton.frame = CGRect(x: 30, y: 600, width: 320, height: 60)
 
     }
@@ -55,6 +77,16 @@ class signAs: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     }
     
+    @IBAction func clientButton(_ sender: Any) {
+    }
+    @objc func transMove() {
+        tabBarController?.selectedIndex = 0
+
+    }
+    @objc func clientMove() {
+        let vc = signUpPage()
+        self.present(vc, animated: true, completion: nil)
+    }
     @objc func submitFunc() {
 //        func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int){
 //            if component == 0 {

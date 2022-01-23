@@ -34,11 +34,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
-        view.addSubview(settingsButton)
-//        getNames()
+        getNames()
 //        view.addSubview(tableView)
         settingsButton.addTarget(self, action: #selector(settings), for: .touchDown)
 
+        self.tableView.register(allTranslatorCell.self, forCellReuseIdentifier: "cell")
 
 
 
@@ -49,6 +49,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
     }
+    
+    @IBAction func settingsLog(_ sender: Any) {
+        // create the alert
+                let alert = UIAlertController(title: "Notice", message: "what would you like to do", preferredStyle: UIAlertController.Style.alert)
+
+                // add the actions (buttons)
+                alert.addAction(UIAlertAction(title: "Log in", style: UIAlertAction.Style.default, handler: {action in
+                    let logVC = logIn()
+                    self.present(logVC, animated: true, completion: nil)
+                    
+                }))
+        alert.addAction(UIAlertAction(title: "Sign Up", style: UIAlertAction.Style.default, handler: {action in
+                    let sinUp = signAs()
+            sinUp.modalPresentationStyle = .fullScreen
+                    self.present(sinUp, animated: true, completion: nil)
+                    
+                }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
+    }
+    
     @objc func settings() {
         // create the alert
                 let alert = UIAlertController(title: "Notice", message: "what would you like to do", preferredStyle: UIAlertController.Style.alert)
@@ -72,27 +95,46 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     
     func getNames() {
-        db.collection("translatorBio").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
+        
+        db.collection("translatorBio").addSnapshotListener { querySnapshot, error in
+            self.arrTanslator = []
+            if let error = error {
+                print("Error: ",error.localizedDescription)
+            }else {
                 for document in querySnapshot!.documents {
-                    let name : String = document.get("transName") as! String
-                    let uid :String = document.get("userID") as! String
-                                      
-         if uid == Auth.auth().currentUser?.uid {
-                                           
-                                       }else{
-                                           
-                                       
-                    self.arrTanslator.append(translatprInfo(name: name , photo: .init(systemName: "person")!))
-                                       }
-
+                    let data = document.data()
+                    let newUser = translatprInfo(
+            name: data["transName"] as? String ?? "nil",
+        photo:  data["userIcon"] as? String ?? "nil")
+                    self.arrTanslator.append(newUser)
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
             }
-            self.tableView.reloadData()
-
         }
+    }
+//        db.collection("translatorBio").getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    let name : String = document.get("transName") as! String
+//                    let uid :String = document.get("userID") as! String
+//
+//         if uid == Auth.auth().currentUser?.uid {
+//
+//                                       }else{
+//
+//
+//                    self.arrTanslator.append(translatprInfo(name: name , photo: .init(systemName: "person")!))
+//                                       }
+//
+//                }
+//            }
+//            self.tableView.reloadData()
+//
+//        }
       
 //        db.collection("translatorBio").whereField("transName", isEqualTo: true)
 //            .getDocuments() { (querySnapshot, err) in
@@ -121,10 +163,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //                          }
 //                      }
 //                  }
-    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let users = arrTanslator[indexPath.row]
+        cell.textLabel?.text = users.name
+        cell.imageView?.image = UIImage(systemName: "person")
+        
+//        cell.nameLabel?.image = users.photo
+        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+              let url = URL(string: urlString) else {
+                 return cell
+              }
+        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            
+            
+            guard let data = data, error == nil else {
+            return
+        }
+            let imageDownloded = UIImage(data: data)
+            
+            DispatchQueue.main.async {
+                cell.imageView?.image = imageDownloded
+
+            }
+
+        }).resume()
+
+          
 //        cell.textLabel?.text = arrTanslator[indexPath.row].name
         
 //        let translator = arrTanslator[indexPath.row]
@@ -139,7 +206,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     struct translatprInfo {
         let name : String
-        let photo : UIImage
+        let photo : String
     }
     
 }

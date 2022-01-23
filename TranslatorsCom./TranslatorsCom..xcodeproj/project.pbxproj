@@ -89,7 +89,6 @@
 				35E8FCFD27847A380092D6CB /* controller */,
 				355D3FF5277B19EB00A97D7B /* AppDelegate.swift */,
 				355D3FF7277B19EB00A97D7B /* SceneDelegate.swift */,
-				35E8FCFE278582A80092D6CB /* translatorProfile.swift */,
 				355D3FFE277B19F100A97D7B /* Assets.xcassets */,
 				355D4000277B19F100A97D7B /* LaunchScreen.storyboard */,
 				355D4003277B19F100A97D7B /* Info.plist */,
@@ -111,6 +110,9 @@
 			children = (
 				35E8FCEA277DC6800092D6CB /* logIn.swift */,
 				35E8FCF5278193720092D6CB /* signUpPage.swift */,
+				35E8FD04279304990092D6CB /* homeTranslator.swift */,
+				35E8FD0027859F220092D6CB /* transBio.swift */,
+				35E8FCFE278582A80092D6CB /* translatorProfile.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -120,9 +122,7 @@
 			children = (
 				355D3FF9277B19EB00A97D7B /* ViewController.swift */,
 				35E8FD02278720100092D6CB /* coustemTableCell.swift */,
-				35E8FD0027859F220092D6CB /* transBio.swift */,
 				35E8FD0E2796F7540092D6CB /* signUpTranslator.swift */,
-				35E8FD04279304990092D6CB /* homeTranslator.swift */,
 				35E8FD0C2796A8140092D6CB /* allTranslatorCell.swift */,
 				35E8FD0827934E6E0092D6CB /* signAs.swift */,
 				35E8FD0627930BC80092D6CB /* ordersPage.swift */,

@@ -228,14 +228,25 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         
         let imagefolder = Storage.storage().reference().child("images")
         if let imageData = profileImage.image?.pngData() {
-            imagefolder.putData(imageData, metadata: nil){
+            imagefolder.child("images").putData(imageData, metadata: nil){
                 (metaData , err) in
                 if let error = err {
                     print(error.localizedDescription)
                 }else {
                     print("تم رفع الصورة بنجاح")
+                 
+                    
                 }
+                imagefolder.child("images").downloadURL(completion: { url, error in
+                    guard let url = url, error == nil else{
+                        return
+                    }
+                    let urlString = url.absoluteString
+                    print("Download URL: \(urlString)")
+                    UserDefaults.standard.set(urlString, forKey: "url")
+                })
             }
+            
         }
         
         
@@ -305,6 +316,13 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
 //
     }
 
+    
+    func downloadImage() {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let ref = storageRef.child("images")
+    }
+    
     @objc private func saveFunc(){
         if profileImage.image != UIImage(systemName: "person.circle") {
             uploadImage()
@@ -373,6 +391,9 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        guard let imageData = selectedImage.pngData() else {
             return
         }
 
