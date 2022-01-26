@@ -10,6 +10,15 @@ import Firebase
 
 class homeTranslator: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
+    
+    
+    var profileImageRefernce : StorageReference? = nil
+    let imagefolder = Storage.storage().reference().child("profileImages")
+    let storageRef = Storage.storage().reference()
+    let userID = Auth.auth().currentUser?.uid
+
+
+    
     @IBOutlet weak var navigationC: UINavigationItem!
     
     
@@ -33,7 +42,7 @@ class homeTranslator: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
-      
+        view.backgroundColor = .white
         loadUser()
         self.tableView.register(allTranslatorCell.self, forCellReuseIdentifier: "cell")
         
@@ -57,21 +66,30 @@ class homeTranslator: UIViewController, UITableViewDelegate, UITableViewDataSour
 //                }
 //            }
 //        }
-            db.collection("translatorBio").addSnapshotListener { querySnapshot, error in
-                self.arrTanslator = []
+            db.collection("translatorBio").getDocuments { [self] QuerySnapshot, error in
+               
                 if let error = error {
                     print("Error: ",error.localizedDescription)
                 }else {
-                    for document in querySnapshot!.documents {
-                        let data = document.data()
-                        let newUser = translatprInfo(
-                name: data["transName"] as? String ?? "nil",
-            photo:  data["userIcon"] as? String ?? "nil")
-                        self.arrTanslator.append(newUser)
+                    for document in QuerySnapshot!.documents {
+                        
+                       let name = document.get("transName") as? String
+        profileImageRefernce = storageRef.child("profileImages/\(name)")
+                        self.arrTanslator.append(translatprInfo(name: name as! String, photo: UIImage(systemName: "person")!))
+
+
+//                        let data = document.data()
+//                        let newUser = translatprInfo(
+//                name: data["transName"] as? String ?? "nil",
+//            photo:  data["userIcon"] as? UIImage ?? "nil")
+//                        self.arrTanslator.append(newUser)
                     }
+                    arrTanslator.reverse()
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+
                     }
+                    
                 }
             }
         }
@@ -107,30 +125,35 @@ class homeTranslator: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)as! allTranslatorCell
 //        cell.nameLabel?.text = arrTanslator[indexPath.row].name
-//        cell.userImage.image = arrTanslator[indexPath.row].photo
+//        cell.userImage?.image = arrTanslator[indexPath.row].photo
+//        cell.userImage?.layer.cornerRadius =  cell.userImage.frame.height/2
+//               cell.userImage?.contentMode = .scaleAspectFit
+//
+        
         let users = arrTanslator[indexPath.row]
         cell.textLabel?.text = users.name
-        cell.imageView?.image = UIImage(systemName: "person")
-        
+//        cell.imageView?.image = UIImage(systemName: "person")
+        cell.imageView?.image = users.photo
+        cell.imageView?.tintColor = .systemMint
 //        cell.nameLabel?.image = users.photo
-        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
-              let url = URL(string: urlString) else {
-                 return cell
-              }
-        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
-            
-            
-            guard let data = data, error == nil else {
-            return
-        }
-            let imageDownloded = UIImage(data: data)
-            
-            DispatchQueue.main.async {
-                cell.imageView?.image = imageDownloded
-
-            }
-
-        }).resume()
+//        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+//              let url = URL(string: urlString) else {
+//                 return cell
+//              }
+//        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+//
+//
+//            guard let data = data, error == nil else {
+//            return
+//        }
+//            let imageDownloded = UIImage(data: data)
+//
+//            DispatchQueue.main.async {
+//                cell.imageView?.image = imageDownloded
+//
+//            }
+//
+//        }).resume()
 
           
         
@@ -140,14 +163,28 @@ class homeTranslator: UIViewController, UITableViewDelegate, UITableViewDataSour
         arrTanslator.count
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCell = arrTanslator[indexPath.row]
-         let profileVc = translatorProfile()
-        self.present(profileVc, animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
         
+         let profileVc = translatorProfile()
+//        var selectedCell = arrTanslator[indexPath.row]
+//        self.completion!(selectedCell)
+        profileVc.nameT = arrTanslator[indexPath.row].name
+        self.present(profileVc, animated: true, completion: nil)
+
+        
+        
+        //Insert your functionality to get the correct person and set the person property in the new custom view controller.
+//        var person : [Person]?
+//        let viewController = translatorProfile()
+//        viewController = self.arrTanslator[indexPath.row]
+//        // Display the new custom view controller.
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//    }
+
     }
     struct translatprInfo {
-        let name : String
-        let photo : String
+        var name : String
+        let photo : UIImage
     }
     
     

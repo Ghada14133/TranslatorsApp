@@ -15,10 +15,20 @@ class coustemTableCell: UITableViewCell {
     @IBOutlet weak var photo: UIImageView!
     
     
-    func setUpCell(pic: UIImage, name : String) {
-        tranName.text = name
-        photo.image = pic
-        
+//    func setUpCell(pic: UIImage, name : String) {
+//        tranName.text = name
+//        photo.image = pic
+//        
+//    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
     }
     
     }

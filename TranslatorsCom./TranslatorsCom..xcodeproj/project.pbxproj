@@ -13,6 +13,9 @@
 		355D3FFD277B19EB00A97D7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 355D3FFB277B19EB00A97D7B /* Main.storyboard */; };
 		355D3FFF277B19F100A97D7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 355D3FFE277B19F100A97D7B /* Assets.xcassets */; };
 		355D4002277B19F100A97D7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 355D4000277B19F100A97D7B /* LaunchScreen.storyboard */; };
+		357C3947279DEEEB000E031D /* contunueAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C3946279DEEEB000E031D /* contunueAs.swift */; };
+		357C394927A028A9000E031D /* chatPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C394827A028A9000E031D /* chatPage.swift */; };
+		357C394B27A03629000E031D /* tabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C394A27A03629000E031D /* tabBar.swift */; };
 		35E8FCEB277DC6800092D6CB /* logIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E8FCEA277DC6800092D6CB /* logIn.swift */; };
 		35E8FCED277DEB510092D6CB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35E8FCEC277DEB500092D6CB /* GoogleService-Info.plist */; };
 		35E8FCF0277DEC590092D6CB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 35E8FCEF277DEC590092D6CB /* FirebaseAuth */; };
@@ -38,6 +41,9 @@
 		355D3FFE277B19F100A97D7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		355D4001277B19F100A97D7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		355D4003277B19F100A97D7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		357C3946279DEEEB000E031D /* contunueAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contunueAs.swift; sourceTree = "<group>"; };
+		357C394827A028A9000E031D /* chatPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatPage.swift; sourceTree = "<group>"; };
+		357C394A27A03629000E031D /* tabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBar.swift; sourceTree = "<group>"; };
 		35E8FCEA277DC6800092D6CB /* logIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logIn.swift; sourceTree = "<group>"; };
 		35E8FCEC277DEB500092D6CB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		35E8FCF5278193720092D6CB /* signUpPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpPage.swift; sourceTree = "<group>"; };
@@ -109,9 +115,10 @@
 			isa = PBXGroup;
 			children = (
 				35E8FCEA277DC6800092D6CB /* logIn.swift */,
-				35E8FCF5278193720092D6CB /* signUpPage.swift */,
 				35E8FD04279304990092D6CB /* homeTranslator.swift */,
+				35E8FCF5278193720092D6CB /* signUpPage.swift */,
 				35E8FD0027859F220092D6CB /* transBio.swift */,
+				35E8FD0E2796F7540092D6CB /* signUpTranslator.swift */,
 				35E8FCFE278582A80092D6CB /* translatorProfile.swift */,
 			);
 			name = model;
@@ -121,10 +128,12 @@
 			isa = PBXGroup;
 			children = (
 				355D3FF9277B19EB00A97D7B /* ViewController.swift */,
+				357C3946279DEEEB000E031D /* contunueAs.swift */,
 				35E8FD02278720100092D6CB /* coustemTableCell.swift */,
-				35E8FD0E2796F7540092D6CB /* signUpTranslator.swift */,
 				35E8FD0C2796A8140092D6CB /* allTranslatorCell.swift */,
+				357C394A27A03629000E031D /* tabBar.swift */,
 				35E8FD0827934E6E0092D6CB /* signAs.swift */,
+				357C394827A028A9000E031D /* chatPage.swift */,
 				35E8FD0627930BC80092D6CB /* ordersPage.swift */,
 			);
 			name = controller;
@@ -210,9 +219,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				357C3947279DEEEB000E031D /* contunueAs.swift in Sources */,
 				355D3FFA277B19EB00A97D7B /* ViewController.swift in Sources */,
 				35E8FD0D2796A8140092D6CB /* allTranslatorCell.swift in Sources */,
+				357C394B27A03629000E031D /* tabBar.swift in Sources */,
 				35E8FD03278720100092D6CB /* coustemTableCell.swift in Sources */,
+				357C394927A028A9000E031D /* chatPage.swift in Sources */,
 				35E8FCFF278582A80092D6CB /* translatorProfile.swift in Sources */,
 				35E8FD05279304990092D6CB /* homeTranslator.swift in Sources */,
 				35E8FCF6278193720092D6CB /* signUpPage.swift in Sources */,

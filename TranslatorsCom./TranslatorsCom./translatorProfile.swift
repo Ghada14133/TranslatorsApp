@@ -13,7 +13,23 @@ class translatorProfile: UIViewController {
     
     let userID = Auth.auth().currentUser?.uid
     let db = Firestore.firestore()
+       var nameT = ""
+    let imageFolderReference = Storage.storage().reference().child("profileImages")
 
+    let starImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "star2")
+        
+        
+
+//        imageView.layer.borderWidth = 2
+        
+
+        return imageView
+        
+    }()
+
+    
     let profileImage : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.circle")
@@ -89,11 +105,19 @@ class translatorProfile: UIViewController {
         return price
 
     }()
+    let priceLabel : UILabel = {
+        let price = UILabel()
+      
+        return price
+
+    }()
     
     override func loadView() {
         super.loadView()
 
         loadUser()
+//        loadImage()
+        downloadImage()
         view.addSubview(name)
         view.addSubview(nameLabel)
         view.addSubview(edu)
@@ -102,10 +126,15 @@ class translatorProfile: UIViewController {
         view.addSubview(experienceLabel)
         view.addSubview(rate)
         view.addSubview(price)
+        view.addSubview(priceLabel)
         view.addSubview(askButton)
         view.addSubview(profileImage)
-
+        nameLabel.text = nameT
+        view.addSubview(starImage)
         view.backgroundColor = .white
+        askButton.addTarget(self, action: #selector(ask), for: .touchDown)
+
+        
     }
     
 //    override func viewDidLoad() {
@@ -126,8 +155,12 @@ class translatorProfile: UIViewController {
         eduLabel.frame = CGRect(x: 30, y: 260, width: 320, height: 50)
         experience.frame = CGRect(x: 30, y: 320, width: 320, height: 30)
         experienceLabel.frame = CGRect(x: 30, y: 350, width: 320, height: 50)
-        rate.frame = CGRect(x: 30, y: 430, width: 320, height: 30)
-        price.frame = CGRect(x: 30, y: 470, width: 320, height: 40)
+        rate.frame = CGRect(x: 30, y: 430, width: 70, height: 30)
+        starImage.frame = CGRect(x: 110, y: 430, width: 200, height: 40)
+
+        price.frame = CGRect(x: 30, y: 470, width: 200, height: 40)
+        priceLabel.frame = CGRect(x: 220, y: 470, width: 50, height: 40)
+
         askButton.frame = CGRect(x: 30, y: 600, width: 320, height: 50)
         profileImage.frame = CGRect(x: 100,y: 50,width: 200,height: 100)
 
@@ -141,26 +174,62 @@ class translatorProfile: UIViewController {
 
 
     }
+    @objc func ask() {
+        let vc = chatPage()
+//        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+//        let userVC = storyboard?.instantiateViewController(withIdentifier: "chat") as! chatPage
+//
+//        userVC.modalPresentationStyle = .fullScreen
+//
+//        self.navigationController?.pushViewController(userVC, animated: true)
+//    }
+//        let tabBarController = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
+//            tabBarController.selectedIndex = 3
+//            self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: {})
+        
+        //
+//        let vc = UITabBarItem()
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated: true, completion: nil)
+        
+        //
+//        let userVC = self.storyboard?.instantiateViewController(withIdentifier: "order") as! ordersPage
+//
+//        userVC.modalPresentationStyle = .fullScreen
+//
+//        self.navigationController?.pushViewController(userVC, animated: true)
+        
+
+   
     
     //MARK: fetch user data
     func loadUser() {
+        if profileImage.image != UIImage(systemName: "person.circle") {
+            downloadImage()
+        }
       if let userId = userID {
-        db.collection("translatorBio").document(userId).getDocument { documentSnapshot, error in
+        db.collection("translatorBio").whereField("transName", isEqualTo: nameT).getDocuments() { (querySnapshot, error) in
           if let error = error {
             print("Error: ",error.localizedDescription)
           }else {
-              self.nameLabel.text = documentSnapshot?.get("name") as? String ?? "nil"
-              self.eduLabel.text = String(documentSnapshot?.get("education") as? String ?? "nil")
+              for document in querySnapshot!.documents {
+                                  
+//              self.nameLabel.text = documentSnapshot?.get("transName") as? String
+              self.eduLabel.text = document.get("education") as? String
 //              self.institutionField.text = documentSnapshot?.get("institution") as? String ?? "nil"
-              self.experienceLabel.text = documentSnapshot?.get("experience") as? String ?? "nil"
+              self.experienceLabel.text = document.get("experience") as? String ?? "nil"
+                  self.priceLabel.text = document.get("price") as? String ?? "nil"
 
-            let imgStr = documentSnapshot?.get("userIcon") as? String
+
+            let imgStr = document.get("userIcon") as? String
             if imgStr == "nil" {
               self.profileImage.image = UIImage(systemName: "person.circle")
             }
             else {
               sleep(2)
-              self.loadImage(imgStr: imgStr!)
+                self.downloadImage()
                
             }
              
@@ -169,19 +238,59 @@ class translatorProfile: UIViewController {
         }
       }
     }
-    func loadImage(imgStr: String) {
-      let url = "gs://gheras-52e4d.appspot.com/images/" + "\(imgStr)"
-      let Ref = Storage.storage().reference(forURL: url)
-      Ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
-        if error != nil {
-          print("Error: Image could not download!")
-          print("===================")
-          print(error?.localizedDescription)
-        } else {
-          self.profileImage.image = UIImage(data: data!)
-        }
-      }
     }
+    func downloadImage(){
+           
+           let imageRefrence = imageFolderReference.child("imageProfile")
+           
+           imageRefrence.getData(maxSize: 1 * 1024 * 1024) { data, error in
+             
+               if error != nil {
+
+             } else {
+               
+               let image = UIImage(data: data!)
+               self.profileImage.contentMode = .scaleAspectFill
+               self.profileImage.image = image
+                 
+             }
+           }
+    
+       }
+    
+    
+//    func loadImage() {
+//        let imagefolder = Storage.storage().reference().child("profileImages")
+//
+//        let imageRefrence = imagefolder.child("\(userID)")
+//
+//                imageRefrence.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//                  if let error = error {
+//
+//                  } else {
+//
+//                    let image = UIImage(data: data!)
+//
+//                      self.profileImage.contentMode = .scaleAspectFill
+//                      self.profileImage.image = image
+//                  }
+//                }
+//
+//    }
+        
+        
+//      let url = "gs://gheras-52e4d.appspot.com/images/" + "\(imgStr)"
+//      let Ref = Storage.storage().reference(forURL: url)
+//      Ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//        if error != nil {
+//          print("Error: Image could not download!")
+//          print("===================")
+//          print(error?.localizedDescription)
+//        } else {
+//          self.profileImage.image = UIImage(data: data!)
+//        }
+//      }
+//    }
 
 
 }

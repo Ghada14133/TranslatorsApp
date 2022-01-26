@@ -19,7 +19,7 @@ class signAs: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     }()
     let signAs : UILabel = {
         let signAs = UILabel()
-        signAs.text = "Sign Up as :"
+        signAs.text = "Contenue As :"
         return signAs
 
     }()
@@ -80,8 +80,14 @@ class signAs: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBAction func clientButton(_ sender: Any) {
     }
     @objc func transMove() {
-        tabBarController?.selectedIndex = 0
+        let userVC = storyboard?.instantiateViewController(withIdentifier: "sign") as! signUpTranslator
+        userVC.modalPresentationStyle = .fullScreen
 
+        self.navigationController?.pushViewController(userVC, animated: true)
+
+                
+//        let vc = signUpTranslator()
+//        self.present(vc, animated: true, completion: nil)
     }
     @objc func clientMove() {
         let vc = signUpPage()

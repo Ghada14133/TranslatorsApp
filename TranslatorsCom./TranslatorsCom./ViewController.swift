@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         getNames()
 //        view.addSubview(tableView)
-        settingsButton.addTarget(self, action: #selector(settings), for: .touchDown)
+//        settingsButton.addTarget(self, action: #selector(settings), for: .touchDown)
 
         self.tableView.register(allTranslatorCell.self, forCellReuseIdentifier: "cell")
 
@@ -61,9 +61,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                 }))
         alert.addAction(UIAlertAction(title: "Sign Up", style: UIAlertAction.Style.default, handler: {action in
-                    let sinUp = signAs()
-            sinUp.modalPresentationStyle = .fullScreen
-                    self.present(sinUp, animated: true, completion: nil)
+            let userVC = self.storyboard?.instantiateViewController(withIdentifier: "signAs") as! signAs
+           
+            userVC.modalPresentationStyle = .fullScreen
+
+            self.navigationController?.pushViewController(userVC, animated: true)
+            
+            
+//                    let sinUp = contunueAs()
+//            sinUp.modalPresentationStyle = .fullScreen
+//                    self.present(sinUp, animated: true, completion: nil)
                     
                 }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
@@ -72,26 +79,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.present(alert, animated: true, completion: nil)
     }
     
-    @objc func settings() {
-        // create the alert
-                let alert = UIAlertController(title: "Notice", message: "what would you like to do", preferredStyle: UIAlertController.Style.alert)
-
-                // add the actions (buttons)
-                alert.addAction(UIAlertAction(title: "Log in", style: UIAlertAction.Style.default, handler: {action in
-                    let logVC = logIn()
-                    self.present(logVC, animated: true, completion: nil)
-                    
-                }))
-        alert.addAction(UIAlertAction(title: "Sign Up", style: UIAlertAction.Style.default, handler: {action in
-                    let sinUp = signUpPage()
-                    self.present(sinUp, animated: true, completion: nil)
-                    
-                }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-
-                // show the alert
-                self.present(alert, animated: true, completion: nil)
-            }
+//    @objc func settings() {
+//        // create the alert
+//                let alert = UIAlertController(title: "Notice", message: "what would you like to do", preferredStyle: UIAlertController.Style.alert)
+//
+//                // add the actions (buttons)
+//                alert.addAction(UIAlertAction(title: "Log in", style: UIAlertAction.Style.default, handler: {action in
+//                    let logVC = logIn()
+//                    self.present(logVC, animated: true, completion: nil)
+//
+//                }))
+//        alert.addAction(UIAlertAction(title: "Sign Up", style: UIAlertAction.Style.default, handler: {action in
+//                    let sinUp = signUpPage()
+//                    self.present(sinUp, animated: true, completion: nil)
+//
+//                }))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+//
+//                // show the alert
+//                self.present(alert, animated: true, completion: nil)
+//            }
         
     
     func getNames() {
@@ -170,26 +177,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let users = arrTanslator[indexPath.row]
         cell.textLabel?.text = users.name
         cell.imageView?.image = UIImage(systemName: "person")
+        cell.imageView?.tintColor = .systemMint
         
 //        cell.nameLabel?.image = users.photo
-        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
-              let url = URL(string: urlString) else {
-                 return cell
-              }
-        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
-            
-            
-            guard let data = data, error == nil else {
-            return
-        }
-            let imageDownloded = UIImage(data: data)
-            
-            DispatchQueue.main.async {
-                cell.imageView?.image = imageDownloded
-
-            }
-
-        }).resume()
+//        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+//              let url = URL(string: urlString) else {
+//                 return cell
+//              }
+//        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+//
+//
+//            guard let data = data, error == nil else {
+//            return
+//        }
+//            let imageDownloded = UIImage(data: data)
+//
+//            DispatchQueue.main.async {
+//                cell.imageView?.image = imageDownloded
+//
+//            }
+//
+//        }).resume()
 
           
 //        cell.textLabel?.text = arrTanslator[indexPath.row].name

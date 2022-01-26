@@ -15,6 +15,8 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     let db = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid
     var imageName = "\(UUID().uuidString).png"
+    let imageFolderReference = Storage.storage().reference().child("profileImages")
+
 
     
     
@@ -99,6 +101,21 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         return save
 
     }()
+    let price : UILabel = {
+        let name = UILabel()
+        name.text = "Price :"
+        return name
+
+    }()
+    let priceField : UITextField = {
+        let name = UITextField()
+        name.placeholder = "enter your price for every page "
+        name.layer.borderWidth = 1
+        name.layer.borderColor = UIColor.black.cgColor
+        
+        return name
+
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +130,9 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         view.addSubview(experienceField)
         view.addSubview(saveButton)
         view.addSubview(transName)
+        view.addSubview(price)
+        view.addSubview(priceField)
+        downloadImage()
         profileImage.isUserInteractionEnabled = true
         
         
@@ -134,6 +154,10 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         institutionField.frame = CGRect(x: 30, y: 430, width: 320, height: 30)
         experience.frame = CGRect(x: 30, y: 480, width: 320, height: 30)
         experienceField.frame = CGRect(x: 30, y: 510, width: 320, height: 60)
+        price.frame = CGRect(x: 30, y: 620, width: 320, height: 30)
+        priceField.frame = CGRect(x: 30, y: 660, width: 320, height: 30)
+
+
         saveButton.frame = CGRect(x: 30, y: 700, width: 320, height: 30) 
         
 //        scrollView.frame = view.bounds
@@ -151,7 +175,25 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         self.loadUser()
       }
     }
-        
+    func downloadImage(){
+           
+           let imageRefrence = imageFolderReference.child("imageProfile")
+           
+           imageRefrence.getData(maxSize: 1 * 1024 * 1024) { data, error in
+             
+               if error != nil {
+
+             } else {
+               
+               let image = UIImage(data: data!)
+               self.profileImage.contentMode = .scaleAspectFill
+               self.profileImage.image = image
+                 
+             }
+           }
+    
+       }
+
         
     @IBAction func settingButton(_ sender: Any) {
         let alert = UIAlertController(title: "Notice", message: "what would you like to do", preferredStyle: UIAlertController.Style.alert)
@@ -178,12 +220,15 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     //MARK: fetch user data
     func loadUser() {
+        if profileImage.image != UIImage(systemName: "person.circle") {
+            downloadImage()
+        }
       if let userId = userID {
         db.collection("translatorBio").document(userId).getDocument { documentSnapshot, error in
           if let error = error {
             print("Error: ",error.localizedDescription)
           }else {
-            self.transName.text = documentSnapshot?.get("name") as? String ?? "nil"
+            self.transName.text = documentSnapshot?.get("transName") as? String ?? "nil"
             self.degree.text = String(documentSnapshot?.get("education") as? String ?? "nil")
               self.institutionField.text = documentSnapshot?.get("institution") as? String ?? "nil"
               self.experienceField.text = documentSnapshot?.get("experience") as? String ?? "nil"
@@ -195,7 +240,7 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             else {
               sleep(2)
               self.loadImage(imgStr: imgStr!)
-               
+
             }
              
              
@@ -204,7 +249,7 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
       }
     }
     func loadImage(imgStr: String) {
-      let url = "gs://gheras-52e4d.appspot.com/images/" + "\(imgStr)"
+      let url = "gs://translatorsapp-ba57b.appspot.com/imageProfile" + "\(imgStr)"
       let Ref = Storage.storage().reference(forURL: url)
       Ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
         if error != nil {
@@ -218,36 +263,36 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     
     
-    func uploadImage() {
-//        let storageRef = Storage.storage().reference()
-//        let uploadData = UIimagePNGRepresentation
-//        storageRef.putData(<#T##uploadData: Data##Data#>)
+//    func uploadImage() {
+////        let storageRef = Storage.storage().reference()
+////        let uploadData = UIimagePNGRepresentation
+////        storageRef.putData(<#T##uploadData: Data##Data#>)
+////
+////
 //
 //
-        
-        
-        let imagefolder = Storage.storage().reference().child("images")
-        if let imageData = profileImage.image?.pngData() {
-            imagefolder.child("images").putData(imageData, metadata: nil){
-                (metaData , err) in
-                if let error = err {
-                    print(error.localizedDescription)
-                }else {
-                    print("تم رفع الصورة بنجاح")
-                 
-                    
-                }
-                imagefolder.child("images").downloadURL(completion: { url, error in
-                    guard let url = url, error == nil else{
-                        return
-                    }
-                    let urlString = url.absoluteString
-                    print("Download URL: \(urlString)")
-                    UserDefaults.standard.set(urlString, forKey: "url")
-                })
-            }
-            
-        }
+//        let imagefolder = Storage.storage().reference().child("images")
+//        if let imageData = profileImage.image?.pngData() {
+//            imagefolder.child("images").putData(imageData, metadata: nil){
+//                (metaData , err) in
+//                if let error = err {
+//                    print(error.localizedDescription)
+//                }else {
+//                    print("تم رفع الصورة بنجاح")
+//
+//
+//                }
+//                imagefolder.child("images").downloadURL(completion: { url, error in
+//                    guard let url = url, error == nil else{
+//                        return
+//                    }
+//                    let urlString = url.absoluteString
+//                    print("Download URL: \(urlString)")
+//                    UserDefaults.standard.set(urlString, forKey: "url")
+//                })
+//            }
+//
+//        }
         
         
         
@@ -313,46 +358,36 @@ class transBio: UIViewController, UIImagePickerControllerDelegate, UINavigationC
 //                }
 //            }
 //        }
-//
-    }
+////
+//    }
 
-    
-    func downloadImage() {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let ref = storageRef.child("images")
-    }
+ 
     
     @objc private func saveFunc(){
-        if profileImage.image != UIImage(systemName: "person.circle") {
-            uploadImage()
-        }
-        if transName.text == "" || degree.text == "" || institutionField.text == "" || experienceField.text == ""  {
+//        if profileImage.image != UIImage(systemName: "person.circle") {
+//            downloadImage()
+//        }
+//        if transName.text == "" || degree.text == "" || institutionField.text == "" || experienceField.text == ""  {
              let alertController = UIAlertController(title: "Error", message: "Please complete all the fields", preferredStyle: .alert)
              let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
              alertController.addAction(defaultAction)
              present(alertController, animated: true, completion: nil)
-           }else {
-        
-        var ref: DocumentReference? = nil
-        ref = db.collection("translatorBio").addDocument(data: [
-            "transName" : transName.text,
-            "education": degree.text,
-            "institution": institutionField.text,
-            "experience": experienceField.text,
-            "userID" :userID,
-            "userIcon": profileImage.image == UIImage(systemName: "person.circle") ? "nil" : imageName
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
-        
-           }
-        let alertController = UIAlertController(title: "Thanks", message: "Changes have been saved", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//           }else {
+//
+//        var ref: DocumentReference? = nil
+//        ref = db.collection("translatorBio").addDocument(data: [
+//            "transName" : transName.text,
+//            "education": degree.text,
+//            "institution": institutionField.text,
+//            "experience": experienceField.text,
+//            "userID" :userID,
+//            "userIcon": profileImage.image == UIImage(systemName: "person.circle") ? "nil" : imageName
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }pn(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(defaultAction)
         present(alertController, animated: true, completion: nil)
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IcN-0a-NoM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JGn-vp-dmC">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -10,6 +10,38 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="joS-Pc-adM">
+            <objects>
+                <viewController id="qli-U4-IxA" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SYr-rE-1cR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="trans" translatesAutoresizingMaskIntoConstraints="NO" id="j3Q-Ae-hs0">
+                                <rect key="frame" x="48" y="228" width="290" height="148"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZL9-ch-iTI">
+                                <rect key="frame" x="132" y="473" width="122" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="start"/>
+                                <connections>
+                                    <action selector="translatorButton:" destination="69v-hd-sqT" eventType="touchUpInside" id="Jv5-m0-iWe"/>
+                                    <segue destination="IcN-0a-NoM" kind="presentation" modalPresentationStyle="fullScreen" id="ED3-oy-D7s"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2D2-3L-eeg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ONi-uY-W0a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-617.39130434782612" y="-579.24107142857144"/>
+        </scene>
+        <!--Translators-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,7 +53,7 @@
                                 <rect key="frame" x="0.0" y="168" width="414" height="728"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="200" id="7s7-Es-8e9" customClass="coustemTableCell" customModule="TranslatorsCom_" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellHome" rowHeight="200" id="7s7-Es-8e9" customClass="coustemTableCell" customModule="TranslatorsCom_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7s7-Es-8e9" id="TmY-vj-587">
@@ -59,8 +91,8 @@
                             <constraint firstAttribute="bottom" secondItem="jez-KL-QkH" secondAttribute="bottom" id="wRt-1Z-yUt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9x2-n9-EgB">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" width="20" id="AQ4-1M-2l0">
+                    <navigationItem key="navigationItem" title="Translators" id="9x2-n9-EgB">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" width="20" id="AQ4-1M-2l0">
                             <imageReference key="image" image="circle.grid.hex.fill" catalog="system" symbolScale="large"/>
                             <inset key="imageInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                             <color key="tintColor" red="0.086059711873531342" green="0.74538493156433105" blue="0.56957352161407471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -110,10 +142,59 @@
             </objects>
             <point key="canvasLocation" x="748" y="102"/>
         </scene>
+        <!--Contunue As-->
+        <scene sceneID="C0A-0l-9Go">
+            <objects>
+                <viewController id="9SR-Bf-Pvh" customClass="contunueAs" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YuT-7C-iP3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contunue As :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkN-Wd-Tbf">
+                                <rect key="frame" x="58" y="280" width="184" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Wc-cB-i5Z">
+                                <rect key="frame" x="99" y="401" width="102" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.08605971187" green="0.74538493159999997" blue="0.56957352159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Translator"/>
+                                <connections>
+                                    <action selector="translatorButton:" destination="69v-hd-sqT" eventType="touchUpInside" id="byb-PF-VY8"/>
+                                    <segue destination="5as-ee-Oek" kind="presentation" modalPresentationStyle="fullScreen" id="PjV-kz-5s0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqM-M0-GPs">
+                                <rect key="frame" x="99" y="477" width="102" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.086059711873531342" green="0.74538493156433105" blue="0.56957352161407471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Client"/>
+                                <connections>
+                                    <action selector="clientButton:" destination="69v-hd-sqT" eventType="touchUpInside" id="VEr-j2-7UR"/>
+                                    <segue destination="goQ-iF-Ve7" kind="showDetail" id="aJ1-TP-dTq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WCy-Ks-Cl9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="TkN-Wd-Tbf" id="3lW-uG-498"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AYN-Ge-Edf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1969.5652173913045" y="-579.24107142857144"/>
+        </scene>
         <!--Sign As-->
         <scene sceneID="LJj-97-uAq">
             <objects>
-                <viewController id="69v-hd-sqT" customClass="signAs" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signAs" useStoryboardIdentifierAsRestorationIdentifier="YES" id="69v-hd-sqT" customClass="signAs" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8yY-wI-3uf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,16 +207,6 @@
                                 <buttonConfiguration key="configuration" style="tinted" title="Translator"/>
                                 <connections>
                                     <action selector="translatorButton:" destination="69v-hd-sqT" eventType="touchUpInside" id="qrk-cU-qao"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqM-M0-GPs">
-                                <rect key="frame" x="97" y="515" width="102" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.086059711873531342" green="0.74538493156433105" blue="0.56957352161407471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Client"/>
-                                <connections>
-                                    <action selector="clientButton:" destination="69v-hd-sqT" eventType="touchUpInside" id="VEr-j2-7UR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -185,7 +256,7 @@
             <objects>
                 <viewController id="goQ-iF-Ve7" customClass="signUpPage" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ptz-cu-xVF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Ykb-hp-2XC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -210,10 +281,10 @@
             </objects>
             <point key="canvasLocation" x="3143" y="102"/>
         </scene>
-        <!--profile-->
+        <!--Profile-->
         <scene sceneID="LAP-EV-Pz5">
             <objects>
-                <viewController id="Jww-Lh-15c" customClass="transBio" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profile" id="Jww-Lh-15c" customClass="transBio" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lnf-jN-ddG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -222,8 +293,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="profile" image="person" catalog="system" id="iBV-pm-05z"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="xvs-mh-PqH">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" width="20" id="Ciq-kb-NQn">
+                    <navigationItem key="navigationItem" title="Profile" id="xvs-mh-PqH">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" width="20" id="Ciq-kb-NQn">
                             <imageReference key="image" image="circle.grid.hex.fill" catalog="system" symbolScale="large"/>
                             <inset key="imageInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                             <color key="tintColor" red="0.086059711873531342" green="0.74538493156433105" blue="0.56957352161407471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -238,10 +309,10 @@
             </objects>
             <point key="canvasLocation" x="4125" y="95"/>
         </scene>
-        <!--home-->
+        <!--Translators-->
         <scene sceneID="pQ7-8r-OXw">
             <objects>
-                <viewController id="mPE-fw-Vr4" customClass="homeTranslator" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="home" id="mPE-fw-Vr4" customClass="homeTranslator" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NEv-wl-5ER">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -250,7 +321,7 @@
                                 <rect key="frame" x="0.0" y="138" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="149" id="8Xu-WZ-5V1" customClass="allTranslatorCell" customModule="TranslatorsCom_" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="149" id="8Xu-WZ-5V1" customClass="allTranslatorCell" customModule="TranslatorsCom_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="149"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Xu-WZ-5V1" id="XiG-K9-p5H">
@@ -261,8 +332,8 @@
                                                     <rect key="frame" x="9" y="24" width="118" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZw-cY-Snc">
-                                                    <rect key="frame" x="198" y="34" width="196" height="60"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZw-cY-Snc">
+                                                    <rect key="frame" x="163" y="0.0" width="168" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -288,8 +359,8 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="home" image="homekit" catalog="system" id="9Gu-hs-ghW"/>
-                    <navigationItem key="navigationItem" id="vpL-AP-68N">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" width="20" id="sRH-ZV-P3q">
+                    <navigationItem key="navigationItem" title="Translators" id="vpL-AP-68N">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" width="20" id="sRH-ZV-P3q">
                             <imageReference key="image" image="circle.grid.hex.fill" catalog="system" symbolScale="large"/>
                             <inset key="imageInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                             <color key="tintColor" red="0.086059711873531342" green="0.74538493156433105" blue="0.56957352161407471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -307,11 +378,48 @@
             </objects>
             <point key="canvasLocation" x="5234.7826086956529" y="93.75"/>
         </scene>
+        <!--Chat Page-->
+        <scene sceneID="Pxh-Bg-D1a">
+            <objects>
+                <viewController storyboardIdentifier="chat" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9g6-9I-ydB" customClass="chatPage" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MA7-bb-ut2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRm-hq-RXj">
+                                <rect key="frame" x="0.0" y="66" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Chatting" id="Gpy-JT-q5N">
+                                        <rightBarButtonItems>
+                                            <barButtonItem id="Nat-4d-MC3"/>
+                                            <barButtonItem title="Logout" width="20" id="Tze-mc-WZ1">
+                                                <imageReference key="image" image="circle.grid.hex.fill" catalog="system" symbolScale="large"/>
+                                                <inset key="imageInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
+                                                <color key="tintColor" red="0.08605971187" green="0.74538493159999997" blue="0.56957352159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="settingButton:" destination="Zey-nZ-4zN" id="134-5y-ES8"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yVe-6j-hDS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RFH-vP-qFT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5833" y="-577"/>
+        </scene>
         <!--Orders-->
         <scene sceneID="UlL-Rp-jxt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ub-u0-lA7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Zey-nZ-4zN" customClass="ordersPage" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
+                    <string key="storyboardIdentifier">order
+    </string>
                     <view key="view" contentMode="scaleToFill" id="HGS-YT-D9n">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -320,8 +428,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Orders" image="folder.fill.badge.plus" catalog="system" id="pBR-FN-eHc"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="PlY-n3-n3i">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" width="20" id="QsP-NL-Viz">
+                    <navigationItem key="navigationItem" title="Orders" id="PlY-n3-n3i">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" width="20" id="QsP-NL-Viz">
                             <imageReference key="image" image="circle.grid.hex.fill" catalog="system" symbolScale="large"/>
                             <inset key="imageInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                             <color key="tintColor" red="0.086059711873531342" green="0.74538493156433105" blue="0.56957352161407471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -332,6 +440,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ub-u0-lA7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6096" y="94"/>
         </scene>
@@ -372,7 +481,6 @@
         <!--Item-->
         <scene sceneID="1Cv-wu-i8h">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RQR-Ye-WAK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="hws-Ur-THx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Xvt-AV-rDr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yVm-Ii-Mu1">
@@ -381,30 +489,46 @@
                     </navigationBar>
                     <connections>
                         <segue destination="Jww-Lh-15c" kind="relationship" relationship="rootViewController" id="cAP-LG-O2m"/>
+                        <segue destination="KYr-XF-ZYU" kind="presentation" modalPresentationStyle="fullScreen" id="Y0o-PK-cOh"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RQR-Ye-WAK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4125" y="754"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up Translator-->
         <scene sceneID="Elm-3R-fMF">
             <objects>
-                <viewController id="5as-ee-Oek" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sign" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5as-ee-Oek" customClass="signUpTranslator" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FNB-EM-VT6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbt-Yw-P8C">
+                                <rect key="frame" x="156" y="674" width="102" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Sign Up"/>
+                                <connections>
+                                    <action selector="signButton:" destination="5as-ee-Oek" eventType="touchUpInside" id="Hob-Ee-JuO"/>
+                                    <action selector="translatorButton:" destination="69v-hd-sqT" eventType="touchUpInside" id="GOf-23-1a6"/>
+                                    <segue destination="JGn-vp-dmC" kind="presentation" modalPresentationStyle="fullScreen" id="OwK-mO-pdn"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="WvN-Ee-TMe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jew-mx-gzz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3532" y="-577"/>
+            <point key="canvasLocation" x="3531.884057971015" y="-577.23214285714278"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar-->
         <scene sceneID="WKy-q6-U48">
             <objects>
-                <tabBarController id="JGn-vp-dmC" sceneMemberID="viewController">
+                <tabBarController id="JGn-vp-dmC" customClass="tabBar" customModule="TranslatorsCom_" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="vN6-r5-Mem"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c4a-c2-luF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -430,6 +554,7 @@
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="trans" width="900" height="500"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

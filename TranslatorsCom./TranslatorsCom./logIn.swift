@@ -71,10 +71,15 @@ class logIn: UIViewController {
 
         Auth.auth().signIn(withEmail: login.text!, password: password.text!) { authResult, error in
         if error == nil {
-            let thirdVC = ViewController()
-            self.present(thirdVC, animated: true, completion: nil)
-            thirdVC.modalTransitionStyle = .crossDissolve
-            thirdVC.modalPresentationStyle = .fullScreen
+            
+            let tab = tabBar()
+            self.present(tab, animated: true, completion: nil)
+            
+            
+//            let thirdVC = ViewController()
+//            self.present(thirdVC, animated: true, completion: nil)
+//            thirdVC.modalTransitionStyle = .crossDissolve
+//            thirdVC.modalPresentationStyle = .fullScreen
         } else {
             print(error?.localizedDescription)
 
